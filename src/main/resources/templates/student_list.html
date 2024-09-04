@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Danh Sách Sinh Viên</title>
+</head>
+<body>
+<h1>Danh Sách Sinh Viên</h1>
+<table>
+  <thead>
+  <tr>
+    <th>Mã Sinh Viên</th>
+    <th>Họ Tên</th>
+    <th>Giới Tính</th>
+    <th>Ngày Sinh</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="sinhVien : ${listSV}">
+    <td th:text="${sinhVien.maSinhVien}">Mã SV</td>
+    <td th:text="${sinhVien.hoTen}">Họ Tên</td>
+    <td th:text="${sinhVien.gioiTinh ? 'Nam' : 'Nữ'}">Giới Tính</td>
+    <td th:text="${sinhVien.ngaySinh}">Ngày Sinh</td>
+    <td>
+      <form th:action="@{'/students/update/' + ${sinhVien.maSinhVien}}" method="get">
+        <button type="submit">Sửa</button>
+      </form>
+      <form th:action="@{'/students/delete/' + ${sinhVien.maSinhVien}}" method="post">
+        <button type="submit">Xóa</button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
